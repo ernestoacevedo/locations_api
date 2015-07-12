@@ -28,13 +28,11 @@ L.tileLayer('http://{s}.tiles.mapbox.com/v3/ernestoacevedo.jo53pace/{z}/{x}/{y}.
 
 new L.Control.Zoom({ position: 'topleft' }).addTo(map);
 
-// navigator.geolocation.getCurrentPosition(GetLocation);
-// function GetLocation(location) {
-// 	        console.log(location.coords.latitude, location.coords.longitude);
-// 	        map.panTo(new L.LatLng(location.coords.latitude, location.coords.longitude));
-// 	        var marker = L.marker([location.coords.latitude, location.coords.longitude]).addTo(map);
-// 	        marker.bindPopup("<p> Ubicación actual </p>");
-// }
+navigator.geolocation.getCurrentPosition(GetLocation);
+function GetLocation(location) {
+	        console.log(location.coords.latitude, location.coords.longitude);
+	        map.panTo(new L.LatLng(location.coords.latitude, location.coords.longitude));
+}
 
 
 var new_event_marker;
