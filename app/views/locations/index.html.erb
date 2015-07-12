@@ -23,7 +23,7 @@
         <td><%= location.lng %></td>
         <td><%= link_to 'Ver', location %></td>
         <td><%= link_to 'Editar', edit_location_path(location) %></td>
-        <td><%= link_to 'Eliminar', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Eliminar', location, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
