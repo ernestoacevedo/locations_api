@@ -26,10 +26,26 @@ L.tileLayer('http://{s}.tiles.mapbox.com/v3/ernestoacevedo.jo53pace/{z}/{x}/{y}.
   maxZoom: 18
 }).addTo(map);
 
-navigator.geolocation.getCurrentPosition(GetLocation);
-function GetLocation(location) {
-	        console.log(location.coords.latitude, location.coords.longitude);
-	        map.panTo(new L.LatLng(location.coords.latitude, location.coords.longitude));
-	        var marker = L.marker([location.coords.latitude, location.coords.longitude]).addTo(map);
-	        marker.bindPopup("<p> Ubicación actual </p>");
-}
+new L.Control.Zoom({ position: 'topleft' }).addTo(map);
+
+// navigator.geolocation.getCurrentPosition(GetLocation);
+// function GetLocation(location) {
+// 	        console.log(location.coords.latitude, location.coords.longitude);
+// 	        map.panTo(new L.LatLng(location.coords.latitude, location.coords.longitude));
+// 	        var marker = L.marker([location.coords.latitude, location.coords.longitude]).addTo(map);
+// 	        marker.bindPopup("<p> Ubicación actual </p>");
+// }
+
+
+var new_event_marker;
+map.on('click', function(e) {
+   if(typeof(new_event_marker)==='undefined') {
+     new_event_marker = new L.marker(e.latlng,{ draggable: true});
+     new_event_marker.addTo(map);
+   }
+   else {
+     new_event_marker.setLatLng(e.latlng);
+   }
+   $('#location_lat').val(e.latlng.lat);
+   $('#location_lng').val(e.latlng.lng);
+});

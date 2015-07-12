@@ -1,0 +1,47 @@
+<%= form_for(@location, :html => {:class => "form-horizontal"}) do |f| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+      <% @location.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label 'Nombre', :class=>"col-sm-4 control-label" %>
+    <div class="col-sm-8">
+    <%= f.text_field :name, :class=>"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Latitud', :class=>"col-sm-4 control-label" %>
+    <div class="col-sm-8">
+    <%= f.text_field :lat, :class=>"form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Longitud', :class=>"col-sm-4 control-label" %>
+    <div class="col-sm-8">
+    <%= f.text_field :lng, :class=>"form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Descripción', :class=>"col-sm-4 control-label" %>
+    <div class="col-sm-8">
+    <%= f.text_area :description, :class=>"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+    <%= f.button "Agregar Ubicación", class: "btn btn-primary btn-block" %>
+    </div>
+  </div>
+<% end %>
