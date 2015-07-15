@@ -28,14 +28,39 @@ L.tileLayer('http://{s}.tiles.mapbox.com/v3/ernestoacevedo.jo53pace/{z}/{x}/{y}.
 
 new L.Control.Zoom({ position: 'topleft' }).addTo(map);
 
+var locations_layer = new L.FeatureGroup();
+
 navigator.geolocation.getCurrentPosition(GetLocation);
 function GetLocation(location) {
 	        console.log(location.coords.latitude, location.coords.longitude);
           $('#location_lat').val(location.coords.latitude);
           $('#location_lng').val( location.coords.longitude);
 	        map.panTo(new L.LatLng(location.coords.latitude, location.coords.longitude));
-}
 
+          $.ajax({
+            url: "/locations.json",
+            dataType: "JSON",
+            method: "GET",
+            success: function(data){
+              console.log(data);
+              $.each(data,function(key,value){
+                console.log(value.name);
+                console.log({lat: value.lat, lng: value.lng});
+                var pin = L.marker({lat: value.lat, lng: value.lng});
+                  pin.bindPopup("<p>"+value.name+"</p>", {
+                      showOnMouseOver: true
+                  });
+                locations_layer.addLayer(pin);
+              });
+            },
+            error: function(){
+              alert('Ocurrió un error');
+            },
+            complete: function(){
+              map.addLayer(locations_layer);
+            }
+          });
+}
 
 var new_event_marker;
 map.on('click', function(e) {
