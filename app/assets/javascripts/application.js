@@ -31,6 +31,8 @@ new L.Control.Zoom({ position: 'topleft' }).addTo(map);
 navigator.geolocation.getCurrentPosition(GetLocation);
 function GetLocation(location) {
 	        console.log(location.coords.latitude, location.coords.longitude);
+          $('#location_lat').val(location.coords.latitude);
+          $('#location_lng').val( location.coords.longitude);
 	        map.panTo(new L.LatLng(location.coords.latitude, location.coords.longitude));
 }
 
